@@ -21,9 +21,13 @@ st.set_page_config(
 )
 
 st.title("Spam SMS Detection")
-st.write("Enter an SMS message below to check whether it is Spam or Ham.")
 
-message = st.text_area("Enter SMS message:")
+st.write(
+    "This app classifies SMS messages as Spam or Ham using "
+    "TF-IDF vectorization and a Multinomial Naive Bayes classifier."
+)
+
+message = st.text_area("Enter an SMS message:")
 
 if st.button("Predict"):
     if message.strip() == "":

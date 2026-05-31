@@ -16,22 +16,20 @@ def clean_text(text):
     return text
 
 
-# Load only this dataset
+# Load dataset
 df = pd.read_csv("data/spam.csv", encoding="latin-1")
 
-# Use only the required columns from this dataset
+# Use only required columns from this dataset
 df = df[["v1", "v2"]]
-
-# Rename columns
 df.columns = ["label", "message"]
 
 # Convert labels: ham = 0, spam = 1
 df["label"] = df["label"].map({"ham": 0, "spam": 1})
 
-# Clean SMS messages
+# Clean text messages
 df["message"] = df["message"].apply(clean_text)
 
-# Remove missing values if any
+# Remove missing values
 df = df.dropna()
 
 X = df["message"]
@@ -46,7 +44,7 @@ X_train, X_test, y_train, y_test = train_test_split(
     stratify=y
 )
 
-# Convert text into numerical features using TF-IDF
+# Convert text into numerical features
 vectorizer = TfidfVectorizer(stop_words="english", max_features=5000)
 
 X_train_tfidf = vectorizer.fit_transform(X_train)
@@ -56,23 +54,25 @@ X_test_tfidf = vectorizer.transform(X_test)
 model = MultinomialNB()
 model.fit(X_train_tfidf, y_train)
 
-# Test model
+# Predict on test data
 y_pred = model.predict(X_test_tfidf)
 
 # Evaluation
 accuracy = accuracy_score(y_test, y_pred)
+report = classification_report(y_test, y_pred, target_names=["Ham", "Spam"])
+matrix = confusion_matrix(y_test, y_pred)
 
-print("Spam SMS Detection Model")
-print("------------------------")
+print("\nSpam SMS Detection Model Evaluation")
+print("-----------------------------------")
 print(f"Accuracy: {accuracy:.4f}")
 
 print("\nClassification Report:")
-print(classification_report(y_test, y_pred, target_names=["Ham", "Spam"]))
+print(report)
 
 print("\nConfusion Matrix:")
-print(confusion_matrix(y_test, y_pred))
+print(matrix)
 
-# Save trained model and vectorizer
+# Save model and vectorizer
 joblib.dump(model, "model.pkl")
 joblib.dump(vectorizer, "vectorizer.pkl")
 
