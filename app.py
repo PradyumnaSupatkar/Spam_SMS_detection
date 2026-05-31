@@ -17,11 +17,10 @@ vectorizer = joblib.load("vectorizer.pkl")
 
 st.set_page_config(
     page_title="Spam SMS Detection",
-    page_icon="📩",
     layout="centered"
 )
 
-st.title("📩 Spam SMS Detection")
+st.title("Spam SMS Detection")
 st.write("Enter an SMS message below to check whether it is Spam or Ham.")
 
 message = st.text_area("Enter SMS message:")
@@ -35,9 +34,6 @@ if st.button("Predict"):
         prediction = model.predict(vectorized_message)[0]
 
         if prediction == 1:
-            st.error("🚨 This message is predicted as SPAM.")
+            st.error("This message is predicted as SPAM.")
         else:
-            st.success("✅ This message is predicted as HAM / Not Spam.")
-
-st.markdown("---")
-st.caption("Built using Python, Scikit-learn, TF-IDF, Naive Bayes, and Streamlit.")
+            st.success("This message is predicted as HAM / Not Spam.")
