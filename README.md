@@ -1,42 +1,38 @@
 # Spam SMS Detection
 
-This project detects whether an SMS message is spam or ham using Natural Language Processing and Machine Learning.
+This is a basic machine learning project for detecting spam SMS messages.
 
-## Project Overview
+The model takes an SMS message as input and predicts whether it is **Spam** or **Ham**.
 
-Spam SMS Detection is a text classification project where SMS messages are classified into two categories:
+## About the Project
 
-- Spam
-- Ham
+In this project, I used a spam SMS dataset and trained a simple text classification model.
+The text data is cleaned first, then converted into numerical form using TF-IDF. After that, I trained a Naive Bayes model to classify the messages.
 
-The project uses TF-IDF vectorization to convert text into numerical features and a machine learning classification model to make predictions.
+I also made a small Streamlit app so that we can enter any message and check the prediction.
 
-## Tech Stack
+## What I Used
 
-- Python
-- Pandas
-- NumPy
-- Scikit-learn
-- Matplotlib
-- Seaborn
-- Streamlit
-- Joblib
+* Python
+* Pandas
+* Scikit-learn
+* Streamlit
+* Joblib
 
-## Machine Learning Concepts Used
+## Steps Done
 
-- Data Cleaning
-- Text Preprocessing
-- Label Encoding
-- TF-IDF Vectorization
-- Train-Test Split
-- Model Training
-- Model Evaluation
-- Confusion Matrix
-- Accuracy Score
-- Precision, Recall, and F1-score
+* Loaded the dataset
+* Kept only the message and label columns
+* Cleaned the text messages
+* Converted Spam/Ham labels into numbers
+* Split the data into training and testing data
+* Used TF-IDF vectorizer
+* Trained a Multinomial Naive Bayes model
+* Checked model accuracy and classification report
+* Saved the model and vectorizer
+* Created a simple Streamlit app
 
-## Model Used
+## Model
 
-The main model used in this project is:
-
-- Multinomial Naive Bayes
+I used **Multinomial Naive Bayes** for this project.
+It is a simple and commonly used model for text classification problems like spam detection.
